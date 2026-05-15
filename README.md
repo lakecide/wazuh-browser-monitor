@@ -37,8 +37,8 @@ The Wazuh agent service runs as `SYSTEM` on Windows. Python installed via the **
 1. Run the installer as **Administrator**
 2. Click **Customize installation**
 3. On the Advanced Options screen, check:
-   - ✅ Install Python for all users
-   - ✅ Add Python to PATH
+   - Install Python for all users
+   - Add Python to PATH
 
 This installs Python to `C:\Program Files\Python3xx\` which SYSTEM can access.
 
@@ -61,7 +61,7 @@ Then restart the Wazuh agent:
 Restart-Service -Name wazuh
 ```
 
-> ⚠️ **Warning:** Enabling remote commands allows the Wazuh manager to execute commands on endpoints. Ensure only trusted users have access to the manager and restrict permissions appropriately.
+>  **Warning:** Enabling remote commands allows the Wazuh manager to execute commands on endpoints. Ensure only trusted users have access to the manager and restrict permissions appropriately.
 
 ---
 
