@@ -152,7 +152,7 @@ Create or edit `/var/ossec/etc/decoders/browser_decoder.xml`:
 Create or edit `/var/ossec/etc/rules/browser_rules.xml`:
 
 ```xml
-<group name="browser,monitor,">
+<group name="browser,monitor example,">
 
   <rule id="110100" level="3">
     <decoded_as>json</decoded_as>
@@ -167,21 +167,6 @@ Create or edit `/var/ossec/etc/rules/browser_rules.xml`:
     <field name="url">\.onion$|torproject\.org|darkweb|pastebin\.com</field>
     <description>Suspicious URL visited by $(user): $(url)</description>
     <group>suspicious_browsing,</group>
-  </rule>
-
-  <rule id="110102" level="3">
-    <decoded_as>json</decoded_as>
-    <field name="source">browser-monitor</field>
-    <field name="event">start</field>
-    <description>Browser monitor started on $(agent.name)</description>
-  </rule>
-
-  <rule id="110103" level="12">
-    <decoded_as>json</decoded_as>
-    <field name="source">browser-monitor</field>
-    <field name="event">copy_error|db_error</field>
-    <description>Browser monitor error on $(agent.name): $(error)</description>
-    <group>browser_monitor_error,</group>
   </rule>
 
 </group>
