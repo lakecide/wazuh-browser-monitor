@@ -1,0 +1,45 @@
+<!--
+  browser_rules.xml
+  ──────────────────
+  Path on manager: /var/ossec/etc/rules/browser_rules.xml
+
+  Adjust rule IDs (110100-110103) to avoid conflicts with your existing rules.
+  Add domains to rule 110101 to match your organisation's suspicious URL policy.
+-->
+<group name="browser,monitor,">
+
+  <!-- Base rule: any browser history event -->
+  <rule id="110100" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="source">browser-monitor</field>
+    <field name="event">browser_history</field>
+    <description>Browser history: $(browser) - $(user) visited $(url)</description>
+    <options>no_full_log</options>
+  </rule>
+
+  <!-- High severity: suspicious or policy-violating URLs -->
+  <rule id="110101" level="10">
+    <if_sid>110100</if_sid>
+    <field name="url">\.onion$|torproject\.org|pastebin\.com|darkweb</field>
+    <description>Suspicious URL visited by $(user) on $(agent.name): $(url)</description>
+    <group>suspicious_browsing,</group>
+  </rule>
+
+  <!-- Informational: monitor started -->
+  <rule id="110102" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="source">browser-monitor</field>
+    <field name="event">start</field>
+    <description>Browser monitor started on $(agent.name)</description>
+  </rule>
+
+  <!-- High severity: collection error (file lock or DB corruption) -->
+  <rule id="110103" level="12">
+    <decoded_as>json</decoded_as>
+    <field name="source">browser-monitor</field>
+    <field name="event">copy_error|db_error</field>
+    <description>Browser monitor error on $(agent.name): $(error)</description>
+    <group>browser_monitor_error,</group>
+  </rule>
+
+</group>

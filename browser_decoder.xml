@@ -1,0 +1,16 @@
+<!--
+  browser_decoder.xml
+  ────────────────────
+  Path on manager: /var/ossec/etc/decoders/browser_decoder.xml
+
+  Decodes syslog-style lines produced by browser_monitor.py:
+  May 15 09:37:13 HOSTNAME browser-monitor: {"event": "browser_history", ...}
+-->
+<decoder name="browser-monitor">
+  <prematch>browser-monitor:</prematch>
+</decoder>
+
+<decoder name="browser-monitor-json">
+  <parent>browser-monitor</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
